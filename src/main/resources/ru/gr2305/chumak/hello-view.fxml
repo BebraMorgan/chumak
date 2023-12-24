@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="288.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gr2305.chumak.controllers.HelloController">
+    <children>
+        <Button fx:id="CompanyButton" layoutX="96.0" layoutY="81.0" mnemonicParsing="false" onAction="#onCompanyButtonClick" prefHeight="24.0" prefWidth="99.0" text="Компании" />
+        <Button fx:id="RoomButton" layoutX="96.0" layoutY="44.0" mnemonicParsing="false" onAction="#onRoomButtonClick" text="Помещения" />
+        <Button fx:id="RackButton" layoutX="96.0" layoutY="117.0" mnemonicParsing="false" onAction="#onRackButtonClick" prefHeight="24.0" prefWidth="99.0" text="Стеллажи" />
+        <Button fx:id="CargoButton" layoutX="96.0" layoutY="153.0" mnemonicParsing="false" onAction="#onCargoButtonClick" prefHeight="24.0" prefWidth="99.0" text="Грузы" />
+      <Button fx:id="percentButton" layoutX="56.0" layoutY="232.0" mnemonicParsing="false" onAction="#onPercentButtonClick" prefHeight="24.0" prefWidth="180.0" text="Процент Заполенности" />
+      <Button fx:id="typeButton" layoutX="38.0" layoutY="194.0" mnemonicParsing="false" onAction="#onTypeButtonClick" prefHeight="24.0" prefWidth="213.0" text="Грузы определенного типа" />
+    </children>
+</AnchorPane>

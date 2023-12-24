@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="331.0"
+      prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ru.gr2305.chumak.controllers.company.CompanyController">
+    <children>
+        <MenuBar>
+            <menus>
+                <Menu mnemonicParsing="false" text="Таблица">
+                    <items>
+                        <MenuItem fx:id="addItem" mnemonicParsing="false" text="Добавить" onAction="#onAddItemClick"/>
+                        <MenuItem fx:id="editItem" mnemonicParsing="false" text="Изменить" onAction="#onEditItemClick"/>
+                        <MenuItem fx:id="deleteItem" mnemonicParsing="false" text="Удалить" onAction="#onDeleteItemClick"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Дополнительно">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <TableView fx:id="table" prefHeight="310.0" prefWidth="600.0">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="193.0" text="id"/>
+                <TableColumn fx:id="nameColumn" prefWidth="406.0" text="name"/>
+            </columns>
+        </TableView>
+    </children>
+</VBox>
