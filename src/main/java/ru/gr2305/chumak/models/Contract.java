@@ -22,6 +22,7 @@ public class Contract {
             referencedColumnName = "id"
     )
     private Company company;
+    private String code;
     private Date beginDate;
     private Date endDate;
 

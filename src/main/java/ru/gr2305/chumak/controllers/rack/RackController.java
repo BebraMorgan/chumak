@@ -1,36 +1,28 @@
 package ru.gr2305.chumak.controllers.rack;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import lombok.Getter;
-import ru.gr2305.chumak.EntityManagerDAO;
-import ru.gr2305.chumak.HelloApplication;
-import ru.gr2305.chumak.controllers.HelloController;
 import ru.gr2305.chumak.controllers.base.BaseTableController;
 import ru.gr2305.chumak.controllers.rack.cargos.CargoRackController;
-import ru.gr2305.chumak.controllers.room.AddRoomController;
-import ru.gr2305.chumak.controllers.room.DeleteRoomController;
-import ru.gr2305.chumak.controllers.room.RoomController;
-import ru.gr2305.chumak.controllers.room.racks.RackRoomController;
 import ru.gr2305.chumak.exceptions.WindowedException;
 import ru.gr2305.chumak.models.Rack;
-import ru.gr2305.chumak.models.Room;
+import ru.gr2305.chumak.repositories.RackRepository;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class RackController extends BaseTableController<Rack> {
+public class RackController extends BaseTableController<Rack, RackRepository> {
     public TableColumn<Rack, Integer> idColumn;
     public TableColumn<Rack, String> nameColumn;
     @FXML
     public MenuItem cargoItem;
 
-    @Getter
-    private static Rack rack;
+    @Override
+    protected void performInitialize() {
+        repository = new RackRepository(new Rack());
+    }
 
     @Override
     protected void initTable() {
@@ -40,28 +32,33 @@ public class RackController extends BaseTableController<Rack> {
 
     @Override
     protected void performEdit() throws IOException {
-        openWindow("rack/edit-view.fxml", "Изменить", new EditRackController());
+        openWindow("rack/edit-view.fxml", "Изменить", new EditRackController(
+                table.getSelectionModel().getSelectedItem(), repository
+        ));
     }
 
     @Override
     public void performAdd() throws IOException {
-        openWindow("rack/edit-view.fxml", "Добавить", new AddRackController());
+        openWindow("rack/edit-view.fxml", "Добавить", new AddRackController(new Rack(), repository));
     }
 
     @Override
     protected List<Rack> performUpdateTable() {
-        return EntityManagerDAO.all(Rack.class);
+        return repository.all();
     }
 
     @Override
     protected void performDelete() throws IOException, WindowedException {
-        openWindow("common/confirm-delete-view.fxml", "Подтвердить", new DeleteRackController());
+        openWindow("common/confirm-delete-view.fxml", "Подтвердить", new DeleteRackController(
+                table.getSelectionModel().getSelectedItem(), repository
+        ));
     }
 
     public void onCargoItemClick() throws IOException, WindowedException {
-        if ((rack = table.getSelectionModel().getSelectedItem()) == null)
+        if ((table.getSelectionModel().getSelectedItem()) == null)
             throw new WindowedException("Вы не выбрали ни одного элемента");
-        openWindow("cargo/table-view.fxml", "стеллажи в помещении", new CargoRackController());
-        rack = null;
+        openWindow("cargo/table-view.fxml", "стеллажи в помещении", new CargoRackController(
+                table.getSelectionModel().getSelectedItem()
+        ));
     }
 }

@@ -1,14 +1,18 @@
 package ru.gr2305.chumak.controllers.cargo;
 
-import ru.gr2305.chumak.EntityManagerDAO;
 import ru.gr2305.chumak.controllers.base.BaseDeleteController;
 import ru.gr2305.chumak.models.Cargo;
-import ru.gr2305.chumak.models.transformed.TransformedCargo;
+import ru.gr2305.chumak.repositories.CargoRepository;
 
-public class DeleteCargoController extends BaseDeleteController {
+public class DeleteCargoController extends BaseDeleteController<Cargo, CargoRepository> {
+
+
+    public DeleteCargoController(Cargo entity, CargoRepository repository) {
+        super(entity, repository);
+    }
+
     @Override
     protected void delete() {
-        Cargo cargo = EntityManagerDAO.find(((TransformedCargo) CargoController.getChangeableObject()).getId(), Cargo.class);
-        EntityManagerDAO.delete(cargo);
+        repository.delete(entity);
     }
 }

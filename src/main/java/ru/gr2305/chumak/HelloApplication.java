@@ -8,15 +8,16 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.Getter;
 import org.hibernate.jpa.HibernatePersistenceProvider;
+import ru.gr2305.chumak.repositories.CargoRepository;
+import ru.gr2305.chumak.models.Cargo;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
 public class HelloApplication extends Application {
     @Getter
     private static EntityManager entityManager;
-    @Getter
-    private static EntityManagerDAO entityManagerDAO;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -32,7 +33,6 @@ public class HelloApplication extends Application {
         var provider = new HibernatePersistenceProvider();
         EntityManagerFactory entityManagerFactory = provider.createEntityManagerFactory("persistence", Collections.emptyMap());
         entityManager = entityManagerFactory.createEntityManager();
-        entityManagerDAO = new EntityManagerDAO();
         launch();
         entityManager.close();
     }

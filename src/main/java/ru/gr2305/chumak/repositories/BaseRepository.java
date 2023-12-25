@@ -1,4 +1,4 @@
-package ru.gr2305.chumak;
+package ru.gr2305.chumak.repositories;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -7,17 +7,23 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.jetbrains.annotations.Nullable;
+import ru.gr2305.chumak.HelloApplication;
 
 import java.util.Collections;
 import java.util.List;
 
+abstract public class BaseRepository<T> {
 
+    private T model;
 
-public class EntityManagerDAO {
+    public BaseRepository(T model) {
+        this.model = model;
+    }
+
 
     private static final EntityManager entityManager = HelloApplication.getEntityManager();
 
-    public static void insert(Object entity) {
+    public void insert(T entity) {
         EntityTransaction transaction = entityManager.getTransaction();
         try {
             transaction.begin();
@@ -31,7 +37,7 @@ public class EntityManagerDAO {
         }
     }
 
-    public static void update(Object entity) {
+    public void update(T entity) {
         EntityTransaction transaction = entityManager.getTransaction();
         try {
             transaction.begin();
@@ -45,7 +51,7 @@ public class EntityManagerDAO {
         }
     }
 
-    public static void delete(Object entity) {
+    public void delete(T entity) {
         EntityTransaction transaction = entityManager.getTransaction();
         try {
             transaction.begin();
@@ -60,8 +66,9 @@ public class EntityManagerDAO {
     }
 
     @Nullable
-    public static <T> T find(Integer id, Class<T> entityClass) {
+    public T find(Integer id) {
         EntityTransaction transaction = entityManager.getTransaction();
+        Class<T> entityClass = getModelClass();
         try {
             transaction.begin();
             T entity = entityManager.find(entityClass, id);
@@ -75,9 +82,9 @@ public class EntityManagerDAO {
             return null;
         }
     }
-
-    public static <T> List<T> all(Class<T> entityClass) {
+    public List<T> all() {
         try {
+            Class<T> entityClass = getModelClass();
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
             Root<T> root = criteriaQuery.from(entityClass);
@@ -90,4 +97,7 @@ public class EntityManagerDAO {
         }
     }
 
+    private Class<T> getModelClass() {
+        return (Class<T>) this.model.getClass();
+    }
 }

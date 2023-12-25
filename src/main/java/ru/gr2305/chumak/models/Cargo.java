@@ -3,8 +3,10 @@ package ru.gr2305.chumak.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ru.gr2305.chumak.enums.CargoType;
+import ru.gr2305.chumak.repositories.CargoRepository;
 
 @Entity
 @Data
@@ -32,6 +34,5 @@ public class Cargo {
     private String code;
 
     private CargoType type;
-
 
 }

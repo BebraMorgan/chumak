@@ -1,9 +1,7 @@
 package ru.gr2305.chumak.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import lombok.Getter;
 import ru.gr2305.chumak.controllers.base.BaseController;
 import ru.gr2305.chumak.enums.CargoType;
 import ru.gr2305.chumak.exceptions.WindowedException;
@@ -14,8 +12,7 @@ import java.util.ResourceBundle;
 
 public class ChooseTypeController extends BaseController implements Initializable {
     public ComboBox<String> comboBox;
-    @Getter
-    private static CargoType type;
+    private CargoType type;
     public void find() throws IOException, WindowedException {
         if(comboBox.getSelectionModel().getSelectedItem() == null) throw new WindowedException("Вы не выбрали тип груза");
         for (CargoType cargoType : CargoType.values()) {
@@ -23,7 +20,7 @@ public class ChooseTypeController extends BaseController implements Initializabl
                 type = cargoType;
             }
         }
-        openWindow("table-typed-view.fxml", "груз типа \"" +  type.toString() + "\"");
+        openWindow("table-typed-view.fxml", "груз типа \"" +  type.toString() + "\"", new TypedCargoController(type));
     }
 
     @Override

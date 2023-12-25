@@ -22,14 +22,15 @@ abstract public class BaseController {
 
     public <T> void openWindow(String view, String title, T controller) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(HelloApplication.class.getResource(view));
         loader.setController(controller);
+        loader.setLocation(HelloApplication.class.getResource(view));
         Stage dialogStage = new Stage();
         dialogStage.setTitle(title);
         Scene scene = new Scene(loader.load());
         dialogStage.setScene(scene);
         dialogStage.setMaximized(false);
         dialogStage.showAndWait();
+
     }
 
 }

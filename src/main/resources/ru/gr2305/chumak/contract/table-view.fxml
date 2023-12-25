@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="331.0" prefWidth="551.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="331.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gr2305.chumak.controllers.contract.ContractController">
     <children>
         <MenuBar>
             <menus>
@@ -14,18 +14,14 @@
                         <MenuItem fx:id="deleteItem" mnemonicParsing="false" onAction="#onDeleteItemClick" text="Удалить" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Дополнительно">
-                    <items>
-                        <MenuItem fx:id="CompanyItem" mnemonicParsing="false" onAction="#onCompanyItemClick" text="Посмотреть компании" />
-                    </items>
-                </Menu>
             </menus>
         </MenuBar>
-        <TableView fx:id="table" prefHeight="304.0" prefWidth="572.0">
+        <TableView fx:id="table" prefHeight="304.0" prefWidth="574.0">
             <columns>
-                <TableColumn fx:id="idColumn" prefWidth="193.0" text="id" />
-                <TableColumn fx:id="nameColumn" prefWidth="163.0" text="Код груза" />
-            <TableColumn fx:id="typeColumn" prefWidth="194.0" text="Тип груза" />
+                <TableColumn fx:id="idColumn" text="id" />
+                <TableColumn fx:id="companyColumn" prefWidth="211.0" text="Компания" />
+                <TableColumn fx:id="beginDateColumn" prefWidth="137.0" text="Дата Начала" />
+                <TableColumn fx:id="endDateColumn" prefWidth="163.0" text="Дата Окончания" />
             </columns>
         </TableView>
     </children>

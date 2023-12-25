@@ -9,6 +9,7 @@ public class TransformedCargo {
     private int id;
     private String code;
     private String cargoType;
+    private Cargo cargo;
 
 
 
@@ -16,6 +17,7 @@ public class TransformedCargo {
         id = cargo.getId();
         code = cargo.getCode();
         cargoType = cargo.getType().toString();
+        this.cargo = cargo;
     }
 
 }

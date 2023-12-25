@@ -23,4 +23,7 @@ module ru.gr2305.chumak {
     opens ru.gr2305.chumak.models.transformed to javafx.base;
     opens ru.gr2305.chumak.controllers.cargo to javafx.fxml;
     opens ru.gr2305.chumak.controllers.rack.cargos to javafx.fxml;
+    opens ru.gr2305.chumak.controllers.contract to javafx.fxml;
+    exports ru.gr2305.chumak.repositories;
+    opens ru.gr2305.chumak.repositories to javafx.fxml, lombok;
 }

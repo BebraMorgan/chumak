@@ -8,17 +8,26 @@ import ru.gr2305.chumak.exceptions.WindowedException;
 
 import java.io.IOException;
 
-abstract public class BaseChangeController {
+abstract public class BaseChangeController<M, R> {
     @FXML
     protected Button submitButton;
     @FXML
     protected TextField nameTextField;
+    protected M entity;
+    protected R repository;
+
+    public BaseChangeController(M entity, R repository) {
+        this.entity = entity;
+        this.repository = repository;
+    }
     @FXML
     public void onSubmitButtonClick() throws WindowedException, IOException {
         performSubmit();
         Stage stage = (Stage) submitButton.getScene().getWindow();
         stage.close();
     };
+
+
 
     protected abstract void performSubmit() throws IOException, WindowedException;
 }

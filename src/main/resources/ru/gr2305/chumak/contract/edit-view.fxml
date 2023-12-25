@@ -8,9 +8,9 @@
     <children>
         <Button fx:id="submitButton" layoutX="90.0" layoutY="201.0" mnemonicParsing="false"
                 onAction="#onSubmitButtonClick" text="Подтвердить"/>
-        <TextField fx:id="nameTextField" layoutX="69.0" layoutY="88.0" prefHeight="24.0" prefWidth="150.0"
-                   promptText="Код груза"/>
-        <ComboBox fx:id="cargoTypeBox" layoutX="70.0" layoutY="123.0" prefWidth="150.0" promptText="Тип груза"/>
-        <ComboBox fx:id="companyBox" layoutX="69.0" layoutY="161.0" prefWidth="150.0" promptText="Компания"/>
+        <TextField fx:id="nameTextField" layoutX="69.0" layoutY="61.0" prefHeight="24.0" prefWidth="150.0"/>
+        <ComboBox fx:id="companyBox" layoutX="70.0" layoutY="96.0" prefWidth="150.0" promptText="Компания"/>
+        <DatePicker fx:id="beginPicker" layoutX="46.0" layoutY="135.0" promptText="Начало Контракта"/>
+        <DatePicker fx:id="endPicker" layoutX="46.0" layoutY="171.0" promptText="Конец Контракта"/>
     </children>
 </AnchorPane>

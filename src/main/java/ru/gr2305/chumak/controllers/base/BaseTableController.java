@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
-import lombok.Getter;
 import ru.gr2305.chumak.exceptions.WindowedException;
 
 import java.io.IOException;
@@ -14,9 +13,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public abstract class BaseTableController<T> extends BaseController implements Initializable {
+public abstract class BaseTableController<M, R> extends BaseController implements Initializable {
     @FXML
-    protected TableView<T> table;
+    protected TableView<M> table;
     @FXML
     protected MenuItem deleteItem;
     @FXML
@@ -24,41 +23,40 @@ public abstract class BaseTableController<T> extends BaseController implements I
     @FXML
     protected MenuItem addItem;
 
-    @Getter
-    protected static Object changeableObject;
+    protected R repository;
 
-    protected final ObservableList<T> observableList = FXCollections.observableArrayList();
+    protected final ObservableList<M> observableList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        performInitialize();
         bootTable();
     }
+
+    protected abstract void performInitialize();
 
     public void onAddItemClick() throws IOException {
         performAdd();
         updateTable();
-        changeableObject = null;
     }
     @FXML
     public void onDeleteItemClick() throws IOException, WindowedException {
-        if ((changeableObject = table.getSelectionModel().getSelectedItem()) == null)
+        if (table.getSelectionModel().getSelectedItem() == null)
             throw new WindowedException("Вы не выбрали ни одного элемента");
         performDelete();
         updateTable();
-        changeableObject = null;
     }
     @FXML
     public void onEditItemClick() throws IOException, WindowedException {
-        if ((changeableObject = table.getSelectionModel().getSelectedItem()) == null)
+        if (table.getSelectionModel().getSelectedItem() == null)
             throw new WindowedException("Вы не выбрали ни одного элемента");
         performEdit();
         updateTable();
-        changeableObject = null;
     }
 
     protected void updateTable() {
         observableList.clear();
-        List<T> data = performUpdateTable();
+        List<M> data = performUpdateTable();
         observableList.addAll(data);
         table.setItems(observableList);
     }
@@ -74,7 +72,7 @@ public abstract class BaseTableController<T> extends BaseController implements I
 
     abstract public void performAdd() throws IOException;
 
-    abstract protected List<T> performUpdateTable();
+    abstract protected List<M> performUpdateTable();
 
     abstract protected void performDelete() throws IOException, WindowedException;
 
